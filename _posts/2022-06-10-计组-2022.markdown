@@ -1,0 +1,112 @@
+---
+layout:		post
+title:		"计算机组成原理"
+subtitle:	"\"408，计组\""
+date:		2022-06-09 12:00:00
+author:		"roroliang"
+head-img:	"img/计组.jpg"
+catalog:	ture
+tags:
+    - 408
+    - 计组
+    - 学习
+---
+
+
+
+# (1) 二进制、八进制、十进制、十六进制的相互转换
+
+- 各个进制————十进制     （权值）
+- 二进制—————八进制      （每三个数代表一位）
+- 二进制—————十六进制     （每四个数代表一位）
+- 十进制—————2进制（拆成2^n次方）
+- 八进制——————2进制（每个数三位二进制）
+- 十六进制——————2进制（每个数四位二进制）
+- 
+# (2) 求一个数的原码、补码和移码 
+
+- 机器数，用二进制表示高位为符号位1/0表示
+- 机器数的真值 用正负号代替符号位表示
+- 机器数------
+- 求原码————二进制表示
+- 【x】补=    若x为正  补码与原码相同
+
+   若x为负  符号位不变 数值位取反末位+1
+4位补码的表示范围 -8~+7 
+
+- 移码和补码仅仅第一位不同
+# 
+(3) 由补码求真值 
+
+- 已知【x】补 求【x】真值：若符号位为0，则为正数，数值部分相同
+
+ 若符号位为1，则为负数，数值取反末位+1
+# 
+(4) 由一个数的补码求其相反数的补码 
+
+- 根据【x】补 求【-x】补    对x补各位取反，末位+1
+# 
+(5) 规定位数的码、补码和移码的表示范围 
+# ![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654505331747-60ba7439-53f9-4d1a-87a1-4eead39bd3eb.png#clientId=u8b964cec-171f-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=604&id=u367589f9&margin=%5Bobject%20Object%5D&name=image.png&originHeight=755&originWidth=1426&originalType=binary&ratio=1&rotation=0&showTitle=false&size=103191&status=done&style=none&taskId=u47b9c552-147e-4951-9049-804ce70f6da&title=&width=1140.8)
+移码的表示范围 $-2^{n-1}$~$2^{n-1}-1$
+# 
+(6) IEEE754单精度、双进度格式（真值和机器数的相互转换） 
++- 1.几
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654507868767-45ad49a3-0cfb-4873-addf-b16cc46734d6.png#clientId=uee99c669-3f34-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=234&id=u2dd1e03f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=293&originWidth=1340&originalType=binary&ratio=1&rotation=0&showTitle=false&size=31827&status=done&style=none&taskId=u9c0d1620-4e8c-4635-8a8b-4c57c4fd2f0&title=&width=1072)
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654507938654-f1b864d1-3a2c-4e51-8f8d-a770d2fa3350.png#clientId=uee99c669-3f34-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=86&id=u2828e944&margin=%5Bobject%20Object%5D&name=image.png&originHeight=107&originWidth=978&originalType=binary&ratio=1&rotation=0&showTitle=false&size=24758&status=done&style=none&taskId=uaed155e1-f922-4d37-b58d-cf737201ec1&title=&width=782.4)
+# 
+(7) 数据在C语言中的表示 
+以补码的形式
+# 
+# 
+(8) 按位运算及其应用 
+# ![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654512445835-9f18b643-7ef6-4f76-87c7-7bec0c8a8016.png#clientId=uee99c669-3f34-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=458&id=ue907d031&margin=%5Bobject%20Object%5D&name=image.png&originHeight=572&originWidth=1502&originalType=binary&ratio=1&rotation=0&showTitle=false&size=240717&status=done&style=none&taskId=u215fa698-8cd0-4335-81de-39b8bdd4668&title=&width=1201.6)
+# 
+(9) 逻辑运算及其应用 
+# 
+(10) 位扩展 
+# ![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654512931071-18762aff-9aaa-40fd-acf2-5d84a5cdf8cb.png#clientId=u53b273ef-5de4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=578&id=u335990ac&margin=%5Bobject%20Object%5D&name=image.png&originHeight=722&originWidth=1458&originalType=binary&ratio=1&rotation=0&showTitle=false&size=297082&status=done&style=none&taskId=u6f2f9813-7f94-4adf-9941-1b8db26c202&title=&width=1166.4)
+# 
+(11) 位截断 
+# 
+# 
+(12) 补码加减法运算及各种标志位的计算 
+
+- 溢出标志   OF=Cn异或Cn-1 （cn为进位）OF=1  表示溢出
+- 符号标志    SF=Fn-1（F为本位）SF=1表示结果为负数
+- 零标志    ZF=1  当且仅当F=0   
+- 进位借位标志   Cout异或Cin    即当Cin=0时 CF为进位Cout  Cin=1时Cout取反
+# 
+(13) 通常的寻址方式（立即寻址、直接寻址、间接寻址、变址寻址、基址寻址和相对寻址）：有效地址的计算及操作数或转移目标地址的确定 
+指令寻址：下一条欲执行的指令的地址
+数据寻址：确定本条指令的操作数的地址
+有效地址EA：操作数的真实地址
+立即寻址：形式地址A为操作数本身，又称立即数      访存0次
+直接寻址：指令中的形式地址A就是操作数的真实地址  EA=A  访存1次
+间接寻址：指令中的形式地址A是操作数有效地址所在的存储单元的地址（操作数地址的地址）EA=（A）访存2次
+寄存器寻址：指令中直接给出操作数所在的寄存器编号，EA=R 访存0次
+寄存器间接寻址：寄存器Ri给的是操作数所在的贮存单元的地址。EA=(Ri)
+基址寻址：EA=（BR）+A
+变址寻址：EA=(IX)+A
+相对寻址：EA=PC+A   PC每取一个字节自增1
+
+# 
+(14) MIPS里面的寻址方式：条件转移、无条件转移时转移目标地址的确定 
+# ![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654586815321-03c2cb35-1713-4f11-ae2e-66abdc05bb03.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=582&id=uc8a0823b&margin=%5Bobject%20Object%5D&name=image.png&originHeight=728&originWidth=1452&originalType=binary&ratio=1&rotation=0&showTitle=false&size=87051&status=done&style=none&taskId=u6cfcc32b-3fb4-44d1-a5d9-632bbf9440f&title=&width=1161.6)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654586880373-d0d55f18-4a6d-4172-8d4b-6a86d2e5f4c4.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=431&id=u4a2a1dbb&margin=%5Bobject%20Object%5D&name=image.png&originHeight=539&originWidth=1372&originalType=binary&ratio=1&rotation=0&showTitle=false&size=57458&status=done&style=none&taskId=ua639eed3-9eb2-47df-80b4-bf8af6894cb&title=&width=1097.6)
+(15) CPU数据通路设计：能写出指定指令的操作步骤，画出指定指令的数据通路 
+# ![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654588598964-a89cbd1c-5504-4523-8941-a71dde910615.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=586&id=ub2221763&margin=%5Bobject%20Object%5D&name=image.png&originHeight=732&originWidth=1420&originalType=binary&ratio=1&rotation=0&showTitle=false&size=115477&status=done&style=none&taskId=ue5cb85fb-8012-4ff1-af69-5759f66189a&title=&width=1136)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654588636135-080875d3-9b4f-4df3-99c4-f57e1fd3ac8e.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=647&id=ua35d0e91&margin=%5Bobject%20Object%5D&name=image.png&originHeight=809&originWidth=1419&originalType=binary&ratio=1&rotation=0&showTitle=false&size=175579&status=done&style=none&taskId=uf5d12ff0-f790-4c8d-a4af-3e9c64f5421&title=&width=1135.2)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654588697122-59c8764e-a51b-4d35-93ea-5ec6741efed3.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=565&id=u4da1c6ac&margin=%5Bobject%20Object%5D&name=image.png&originHeight=706&originWidth=1471&originalType=binary&ratio=1&rotation=0&showTitle=false&size=144498&status=done&style=none&taskId=u6d01a86e-8881-4c73-91b5-493530ea667&title=&width=1176.8)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654588971553-92e92fe0-6282-4029-95fd-52bceaaa8239.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=646&id=ue8536a83&margin=%5Bobject%20Object%5D&name=image.png&originHeight=807&originWidth=1346&originalType=binary&ratio=1&rotation=0&showTitle=false&size=157804&status=done&style=none&taskId=u759a994f-0b60-48c8-bcd0-5ec64a67311&title=&width=1076.8)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654597864653-908fd747-050c-4106-ae94-aa48c4fba9b8.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=642&id=u3e53d922&margin=%5Bobject%20Object%5D&name=image.png&originHeight=802&originWidth=1364&originalType=binary&ratio=1&rotation=0&showTitle=false&size=170821&status=done&style=none&taskId=u069834a6-95e0-4600-8ad2-70eb4f6bc8b&title=&width=1091.2)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654597929280-7cfc7b74-780a-4c60-b4f8-91a5c830f1e1.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=544&id=ua86d527f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=680&originWidth=1138&originalType=binary&ratio=1&rotation=0&showTitle=false&size=118063&status=done&style=none&taskId=u1e79acef-cd72-4c41-824f-f3484d18777&title=&width=910.4)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654597953007-d291f95f-0852-4bc6-8624-5dea2d09b74c.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=567&id=u6e089065&margin=%5Bobject%20Object%5D&name=image.png&originHeight=709&originWidth=1407&originalType=binary&ratio=1&rotation=0&showTitle=false&size=141644&status=done&style=none&taskId=udf6f66f4-33b1-4af7-b602-2d36fa1521b&title=&width=1125.6)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654597974624-2f727d24-bf8b-4484-9a78-bae0a4249a75.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=585&id=u73018b12&margin=%5Bobject%20Object%5D&name=image.png&originHeight=731&originWidth=1296&originalType=binary&ratio=1&rotation=0&showTitle=false&size=118916&status=done&style=none&taskId=ub9c6b0b6-9d4b-479e-bb7d-2d2f6674187&title=&width=1036.8)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654597990458-fdad5723-ca05-4b10-bee8-1f2e837b4c4f.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=637&id=ua3ff11f6&margin=%5Bobject%20Object%5D&name=image.png&originHeight=796&originWidth=1308&originalType=binary&ratio=1&rotation=0&showTitle=false&size=164066&status=done&style=none&taskId=u16378182-51dc-4299-a7ec-0f5fa6cfccb&title=&width=1046.4)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654598016900-9e693106-5d28-4cbd-a234-41d63201c679.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=619&id=u1906a88b&margin=%5Bobject%20Object%5D&name=image.png&originHeight=774&originWidth=1390&originalType=binary&ratio=1&rotation=0&showTitle=false&size=130428&status=done&style=none&taskId=u84bf436c-f094-4e80-a60b-e6ef43b802e&title=&width=1112)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654598083111-51010723-80ce-41b3-a292-09df09cda0d3.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=644&id=ud071fcb4&margin=%5Bobject%20Object%5D&name=image.png&originHeight=805&originWidth=1448&originalType=binary&ratio=1&rotation=0&showTitle=false&size=212069&status=done&style=none&taskId=u046de089-fb8f-4596-bbac-2db01eeb22c&title=&width=1158.4)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654598093580-920c05f6-c168-4b73-b601-35c8258dd397.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=650&id=u64bf06b0&margin=%5Bobject%20Object%5D&name=image.png&originHeight=812&originWidth=1351&originalType=binary&ratio=1&rotation=0&showTitle=false&size=173421&status=done&style=none&taskId=u2353916d-eeb4-4fe0-a4eb-c126d93803f&title=&width=1080.8)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654598129216-5a2c26ea-8142-479b-a0e0-76233213ff27.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=625&id=u2fa03d76&margin=%5Bobject%20Object%5D&name=image.png&originHeight=781&originWidth=1341&originalType=binary&ratio=1&rotation=0&showTitle=false&size=140658&status=done&style=none&taskId=u00dc4d5b-e09d-4ea0-b830-0d75c94402e&title=&width=1072.8)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654598144668-c8aab2ef-56ee-4ad4-ab8b-a9bc5210d418.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=647&id=udae5ed79&margin=%5Bobject%20Object%5D&name=image.png&originHeight=809&originWidth=1313&originalType=binary&ratio=1&rotation=0&showTitle=false&size=192641&status=done&style=none&taskId=ucf7e35cc-d94d-4ab3-992f-bb8a9dffcef&title=&width=1050.4)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654598155234-039af4c5-e317-429c-bbf7-f9ecffbc876b.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=641&id=uc0b94943&margin=%5Bobject%20Object%5D&name=image.png&originHeight=801&originWidth=1303&originalType=binary&ratio=1&rotation=0&showTitle=false&size=173694&status=done&style=none&taskId=u9b220aac-8552-4899-9127-b8d2987dd68&title=&width=1042.4)
+(16）控制单元设计：能根据功能表写出指定信号的逻辑表达式及画出相应的电路
+# 
+(18) 程序和数据访问的局部性分析 
+# ![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654598948674-9adf0b99-9194-46be-82bc-0df6fc3aee71.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=606&id=u2886453e&margin=%5Bobject%20Object%5D&name=image.png&originHeight=758&originWidth=1461&originalType=binary&ratio=1&rotation=0&showTitle=false&size=172685&status=done&style=none&taskId=ud76d4725-96ff-42e8-8a6b-a7979f5b683&title=&width=1168.8)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654598958941-e5c02e4e-80c0-476f-ac5a-496f247b8f12.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=647&id=u58af2a49&margin=%5Bobject%20Object%5D&name=image.png&originHeight=809&originWidth=1506&originalType=binary&ratio=1&rotation=0&showTitle=false&size=183074&status=done&style=none&taskId=u72d01303-4e1d-47e3-8fa6-86122abdb8e&title=&width=1204.8)
+# 
+(19) 高速缓存的三种映射方式
+# 
+# 
+(20) 高速缓存的性能分析（命中率、平均访问时间、某个数组元素的行号等）
+# ![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654600203754-9876d8e3-b9b8-424c-9109-7d36d03612cf.png#clientId=ub33666c4-c442-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=124&id=u9c73832a&margin=%5Bobject%20Object%5D&name=image.png&originHeight=155&originWidth=1019&originalType=binary&ratio=1&rotation=0&showTitle=false&size=22386&status=done&style=none&taskId=uca7e68b3-6332-448d-97b2-78896314753&title=&width=815.2)
+# ![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1653706588640-ce30bdb8-a7af-4f74-86ea-1e77fa90131e.png#clientId=uebe2c909-cb99-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=126&id=uae25597d&margin=%5Bobject%20Object%5D&name=image.png&originHeight=158&originWidth=268&originalType=binary&ratio=1&rotation=0&showTitle=false&size=22649&status=done&style=none&taskId=u76323e61-7535-4a08-a975-a69f17acf9f&title=&width=214.4)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1653706643404-975625be-b121-4c1a-8ff0-01982b938535.png#clientId=uebe2c909-cb99-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=90&id=ud658b953&margin=%5Bobject%20Object%5D&name=image.png&originHeight=112&originWidth=242&originalType=binary&ratio=1&rotation=0&showTitle=false&size=16385&status=done&style=none&taskId=uc6770755-ce1d-40f8-8a71-afee6880bd7&title=&width=193.6)
+(21) 虚拟缓存的页表、TLB 
+# 
+# 
+(21) 输入输出组织（I/O端口地址的编址方式、程序查询方式接口的功能及组成、程序中断方式的中断响应过程、中断处理过程、DMA方式接口的组成、DMA方式的数据传输过程等）![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654603242243-37c07ef2-afe0-4e02-93c8-d542e560a48b.png#clientId=u5db4bc24-b271-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=614&id=u2c81fe51&margin=%5Bobject%20Object%5D&name=image.png&originHeight=768&originWidth=1492&originalType=binary&ratio=1&rotation=0&showTitle=false&size=209464&status=done&style=none&taskId=u5dce2379-12f3-4f5c-851e-733f96df4cf&title=&width=1193.6)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654650570187-f7af957f-5fd1-4424-a803-65fb8e987760.png#clientId=u8242ca23-1437-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=593&id=ue3bec127&margin=%5Bobject%20Object%5D&name=image.png&originHeight=741&originWidth=1475&originalType=binary&ratio=1&rotation=0&showTitle=false&size=349544&status=done&style=none&taskId=u6cc7130e-754a-4abf-aff5-1ee9658163e&title=&width=1180)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654650626080-b843ff5b-7e01-4ac0-9939-d6f82e1f28ba.png#clientId=u8242ca23-1437-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=180&id=u78ec903c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=225&originWidth=951&originalType=binary&ratio=1&rotation=0&showTitle=false&size=71361&status=done&style=none&taskId=u179466ef-b020-4175-acdc-f8785372081&title=&width=760.8)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654650915602-3c1c1231-72d9-4f2a-abc1-9325ceed4910.png#clientId=u8242ca23-1437-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=523&id=u17561ef0&margin=%5Bobject%20Object%5D&name=image.png&originHeight=654&originWidth=1474&originalType=binary&ratio=1&rotation=0&showTitle=false&size=227167&status=done&style=none&taskId=uc2eeb081-470f-411d-baf5-9a8d6a039f0&title=&width=1179.2)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654650933780-be79ee04-652a-4b0d-bd99-c7f6a0ca88d7.png#clientId=u8242ca23-1437-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=621&id=u8e6a9f49&margin=%5Bobject%20Object%5D&name=image.png&originHeight=776&originWidth=1282&originalType=binary&ratio=1&rotation=0&showTitle=false&size=237525&status=done&style=none&taskId=u69e6aec5-de05-4447-bdb7-600cd7661d1&title=&width=1025.6)![image.png](https://cdn.nlark.com/yuque/0/2022/png/26728665/1654650989238-f3b5f2fd-0b11-47e6-8d95-41909e68ce9f.png#clientId=u8242ca23-1437-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=640&id=u58490c38&margin=%5Bobject%20Object%5D&name=image.png&originHeight=800&originWidth=1468&originalType=binary&ratio=1&rotation=0&showTitle=false&size=334127&status=done&style=none&taskId=u5ec49b35-dae7-4c6b-bb43-8152ee1507c&title=&width=1174.4)
