@@ -12,4 +12,4 @@ Hi，我是石浩良，人工智能初心者，[bilibili](https://www.bilibili.c
 
 
 
-sidebar-avatar: https://github.com/roroliang.png # use absolute URL, seeing it's used in both `/` and `/about/`
+<img src="C:\Users\dell\Desktop\mmexport1654837121221.jpg" alt="祺祺" style="zoom:25%;" />
