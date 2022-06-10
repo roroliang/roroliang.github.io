@@ -8,5 +8,5 @@ Her Weibo is full of boring content.
 
 [weibo](https://weibo.com/u/5615590655)
 
-![](https://roroliang.github.io/img/wife.jpg)
+<img src="https://roroliang.github.io/img/wife.jpg" style="zoom:15%;" />
 
