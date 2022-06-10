@@ -12,3 +12,9 @@ Hi，我是石浩良，人工智能初心者，[bilibili](https://www.bilibili.c
 
 
 
+```yaml
+wife-img: "img/wife.jpg"
+```
+
+
+

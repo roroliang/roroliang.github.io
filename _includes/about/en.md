@@ -8,5 +8,7 @@ Her Weibo is full of boring content.
 
 [weibo](https://weibo.com/u/5615590655)
 
-<img src="C:\Users\dell\Desktop\mmexport1654837121221.jpg" alt="祺祺" style="zoom:100%;" />
+```YAML
+wife-img: "img/wife.jpg"
+```
 
