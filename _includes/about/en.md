@@ -7,3 +7,5 @@ The current physical activity range is Chongqing Yubei District, which is infest
 Her Weibo is full of boring content.
 
 [weibo](https://weibo.com/u/5615590655)
+
+sidebar-avatar: https://github.com/roroliang.png # use absolute URL, seeing it's used in both `/` and `/about/`
