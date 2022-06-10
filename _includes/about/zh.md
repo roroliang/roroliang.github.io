@@ -8,7 +8,7 @@ Hi，我是石浩良，人工智能初心者，[bilibili](https://www.bilibili.c
 
 微博全是无聊内容
 
-[微博](https://weibo.com/u/5615590655)![](https://roroliang.github.io/img/wife.jpg)
+[微博](https://weibo.com/u/5615590655)<img src="https://roroliang.github.io/img/wife.jpg" style="zoom:15%;" />
 
 
 
