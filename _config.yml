@@ -13,9 +13,11 @@ future: true
 
 # SNS settings
 RSS: false
-weibo_username:    u/7343228002
-zhihu_username:     people/qing-feng-bu-wen-yan-yu-20-3
+weibo_username:    roroliang0
+zhihu_username:     people/roroliang.me
 github_username:    roroliang
+douyin_username:	  user/MS4wLjABAAAApmZgLWPLhWoW1ygfGgF-pfmF8TOIFWtrQ-nIFMVuQEo
+bilibili_username:	501688893
 #twitter_username:   石浩良
 #facebook_username:  
 #linkedin_username:  firstname-lastname-idxxxx
