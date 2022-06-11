@@ -4,7 +4,7 @@ title:		"计算机组成原理"
 subtitle:	"\"408，计组\""
 date:		2022-06-09 12:00:00
 author:		"roroliang"
-head-img:	"img/计组.jpg"
+header-img:	"img/计组.jpg"
 catalog:	ture
 tags:
     - 408
