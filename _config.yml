@@ -14,7 +14,7 @@ future: true
 # SNS settings
 RSS: false
 weibo_username:    roroliang0
-zhihu_username:     people/roroliang.me
+zhihu_username:     roroliang.me
 github_username:    roroliang
 douyin_username:	  user/MS4wLjABAAAApmZgLWPLhWoW1ygfGgF-pfmF8TOIFWtrQ-nIFMVuQEo
 bilibili_username:	501688893
