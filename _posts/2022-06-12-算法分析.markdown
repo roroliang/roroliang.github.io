@@ -42,7 +42,7 @@ tags:
 
 n-1遍时，被排好序。
 
-![屏幕截图 2022-06-12 004912](D:\demo\roroliang.github.io\img\ala\屏幕截图 2022-06-12 004912.png)
+![屏幕截图 2022-06-12 004912](https://roroliang.github.io/img/ala/屏幕截图 2022-06-12 004912.png)
 
 
 
@@ -58,9 +58,9 @@ n-1遍时，被排好序。
 		swap A[i] and A[min]
 ```
 
-![屏幕截图 2022-06-12 010427](D:\demo\roroliang.github.io\img\ala\屏幕截图 2022-06-12 010427.png)
+![屏幕截图 2022-06-12 010427](https://roroliang.github.io/img/ala/屏幕截图 2022-06-12 010427.png)
 
-![屏幕截图 2022-06-12 135046](D:\demo\roroliang.github.io\img\ala\屏幕截图 2022-06-12 135046.png)
+![屏幕截图 2022-06-12 135046](https://roroliang.github.io/img/ala/屏幕截图 2022-06-12 135046.png)
 
 基本操作是键值比较即：A[j]<A[min]，这个比较是依赖于输入数组的规模。
 
@@ -84,7 +84,7 @@ $$
 
 n-1遍就排好了，第i遍（i∈[0,n-2])如下图
 
-![屏幕截图 2022-06-12 135212](D:\demo\roroliang.github.io\img\ala\屏幕截图 2022-06-12 135212.png)
+![屏幕截图 2022-06-12 135212](https://roroliang.github.io/img/ala/屏幕截图 2022-06-12 135212.png)
 
 ```
 算法 BubbleSort(A[0..n-1])
@@ -96,7 +96,7 @@ n-1遍就排好了，第i遍（i∈[0,n-2])如下图
 			if A[j+1]<A[j] swap A[j] and A[j+1]
 ```
 
-![屏幕截图 2022-06-12 140824](D:\demo\roroliang.github.io\img\ala\屏幕截图 2022-06-12 140824.png)
+![屏幕截图 2022-06-12 140824](https://roroliang.github.io/img/ala/屏幕截图 2022-06-12 140824.png)
 
 时间复杂度为 ：
 $$
@@ -150,7 +150,7 @@ $$
 	ruturn -1
 ```
 
-![屏幕截图 2022-06-12 151431](D:\demo\roroliang.github.io\img\ala\屏幕截图 2022-06-12 151431.png)
+![屏幕截图 2022-06-12 151431](https://roroliang.github.io/img/ala/屏幕截图 2022-06-12 151431.png)
 
 时间复杂度(最坏)：
 $$
