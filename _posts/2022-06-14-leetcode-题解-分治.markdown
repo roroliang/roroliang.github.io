@@ -8,7 +8,7 @@ head-img:	"img/leetcode1.jpg"
 catalog:	ture
 tags:
     - 算法
-    - leetcode-题解
+    - leetcode题解
     
 ---
 
