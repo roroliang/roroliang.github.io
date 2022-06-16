@@ -4,7 +4,7 @@ title:		"leetcode-题解-分治"
 subtitle:	"\"算法，leetcode，分治\""
 date:		2022-06-14 17:21:00
 author:		"roroliang"
-head-img:	"img/leetcode1.jpg"
+header-img:	"img/leetcode1.jpg"
 catalog:	ture
 tags:
     - 算法
