@@ -8,7 +8,7 @@ head-img:	"img/leetcode1.jpg"
 catalog:	ture
 tags:
     - 算法
-    - leetcode题解
+    - leetcode-题解
     
 ---
 
@@ -26,7 +26,7 @@ tags:
 
 # 题目
 
-![leetcode1](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20220614172427389.png)
+![leetcode01](/img/leetcode/leetcode01.png)
 
 ## 方法
 
@@ -71,4 +71,78 @@ int reversePair(int[] nums)
 }
 ```
 
-、
+在基本掌握逆序对的情况后，我采用归并排序来解决这个问题，因为归并排序在合并时可以计算出逆序对的数量。
+
+逆序对的计算方法有两个
+
+1. 前面比自己大的个数
+2. 后面比自己小的个数
+
+本题让我们求「在一个数组的某个元素的右边，比自己小的元素的个数」，我们用第二种方法，因此，需要在「前有序数组」的元素归并的时候，数一数「后有序数组」已经归并回去的元素的个数，因为这些已经出列的元素都比当前出列的元素要（严格）小；
+
+但是在「归并」的过程中，元素的位置会发生变化，因此下一步需要思考如何定位元素；一个元素在算法的执行过程中位置发生变化，我们还想定位它，可以使用「索引数组」，技巧在于：「原始数组」不变，用于比较两个元素的大小，真正位置变化的是「索引数组」的位置；
+
+「索引数组」技巧建立了一个一一对应的关系，记录了当前操作的数对应的「原始数组」的下标
+
+归并排序还需要一个辅助数组，来copy索引数组的值。
+
+```c
+void merge(int *nums, int start, int mid, int end, int *index, int *res)
+{
+    int i = start, j = mid + 1, k = 0;
+    int tmp[end-start+1];//temp[]用来copy索引对应的值的数组此方法为归并排序通用
+
+    while (i <= mid && j <= end) {
+        if (nums[index[i]] <= nums[index[j]]) {
+            res[index[i]] += j - (mid + 1);
+            tmp[k++] = index[i++];
+        } else {
+            tmp[k++] = index[j++];
+        }
+    }
+
+    while (i <= mid) {
+        res[index[i]] += j - (mid + 1);//在逆序对中我们是找此元素之前未归并的元素个数
+        //而在这里我们找的是此元素之后归并回去的，就是右边比自己小的
+        tmp[k++] = index[i++];
+    }
+    while (j <= end)
+        tmp[k++] = index[j++];
+
+    for (k = 0; k <= end - start; k++)
+        index[start + k] = tmp[k];
+}
+
+void mergeSort(int *nums, int start, int end, int *index, int *res)
+{
+    if (start >= end)
+        return;
+    int mid = start + (end - start) / 2;
+    mergeSort(nums, start, mid, index, res);//对左边进行归并
+    mergeSort(nums, mid + 1, end, index, res);//对右边进行归并
+
+    if (nums[index[mid]] <= nums[index[mid + 1]])
+        return;
+    merge(nums, start, mid, end, index, res);
+}
+
+int* countSmaller(int* nums, int numsSize, int* returnSize)
+{
+    int *res = (int *)malloc(sizeof(int) * numsSize);//为结果数组申请空间
+    int *index = (int *)malloc(sizeof(int) * numsSize);//为索引数组申请临时空间
+    *returnSize = numsSize;
+    if (nums == NULL || numsSize == 0 || res == NULL || index == NULL)
+        return NULL;
+    memset(res, 0, numsSize * sizeof(int));
+    for (int i = 0; i < numsSize; i++)
+        index[i] = i;
+    mergeSort(nums, 0, numsSize-1, index, res);
+    return res;
+}
+```
+
+## 时间复杂度分析
+
+- 时间复杂度：O(Nlog⁡N)，数组的元素个数是 N，递归执行分治法，时间复杂度是对数级别的，因此时间复杂度是 O(Nlog⁡N)；
+- 空间复杂度：O(N)，需要 3个数组，一个索引数组，一个临时数组用于索引数组的归并，还有一个结果数组，它们的长度都是 N，故空间复杂度是 O(N)。
+
