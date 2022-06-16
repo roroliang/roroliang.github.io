@@ -1,0 +1,74 @@
+---
+layout:		post
+title:		"leetcode-题解-分治"
+subtitle:	"\"算法，leetcode，分治\""
+date:		2022-06-14 17:21:00
+author:		"roroliang"
+head-img:	"img/leetcode1.jpg"
+catalog:	ture
+tags:
+    - 算法
+    - leetcode-题解
+    
+---
+
+
+
+> “分治--计算右侧小于当前元素的个数”
+
+
+
+
+
+
+
+
+
+# 题目
+
+![leetcode1](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20220614172427389.png)
+
+## 方法
+
+分治法
+
+## 算法模型
+
+归并排序：每次合并都要计数右边比自己小的数
+
+## 思路
+
+逆序对：从一个数组中抽出两个数，如果前面一个数严格大于后面一个数，那么这两个数就构成了两个逆序对。
+
+分成相同规模：左边逆序对总数
+
+​						   右边逆序对总数，
+
+​							跨越两个区间的逆序对总数，
+
+排序就消除了逆序的关系，避免重复计算。
+
+排序为了以后快速数出逆序对，利用数组有序性，一下计算出逆序对的总数。
+
+蛮力法：枚举
+
+```c
+int reversePair(int[] nums)
+{
+	int count = 0;
+	int len = sizeof(nums);
+    for (int i=0;i<len-1;i++)
+    {
+        for(int j=i+1;j<len;j++)
+        {
+            if (nums[i]>nums[j])
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+```
+
+、
