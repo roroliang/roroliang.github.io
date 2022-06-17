@@ -86,6 +86,10 @@ int reversePair(int[] nums)
 
 归并排序还需要一个辅助数组，来copy索引数组的值。
 
+**原始数组不变，对下标数组排序**
+
+**比较的时候到原始数组里看数值，记录结果的时候用下表数组的值**
+
 ```c
 void merge(int *nums, int start, int mid, int end, int *index, int *res)
 {
@@ -95,7 +99,7 @@ void merge(int *nums, int start, int mid, int end, int *index, int *res)
     while (i <= mid && j <= end) {
         if (nums[index[i]] <= nums[index[j]]) {
             res[index[i]] += j - (mid + 1);
-            tmp[k++] = index[i++];
+            tmp[k++] = index[i++];//辅助数组里复制的索引数组的值
         } else {
             tmp[k++] = index[j++];
         }
@@ -104,6 +108,7 @@ void merge(int *nums, int start, int mid, int end, int *index, int *res)
     while (i <= mid) {
         res[index[i]] += j - (mid + 1);//在逆序对中我们是找此元素之前未归并的元素个数
         //而在这里我们找的是此元素之后归并回去的，就是右边比自己小的
+        //j-1-(mid+1)+1=j-mid-1
         tmp[k++] = index[i++];
     }
     while (j <= end)
@@ -122,22 +127,22 @@ void mergeSort(int *nums, int start, int end, int *index, int *res)
     mergeSort(nums, mid + 1, end, index, res);//对右边进行归并
 
     if (nums[index[mid]] <= nums[index[mid + 1]])
-        return;
+        return;//如果索引数组的值直接拼起来是有序那么我们就不需要找逆序对
     merge(nums, start, mid, end, index, res);
 }
 
 int* countSmaller(int* nums, int numsSize, int* returnSize)
 {
-    int *res = (int *)malloc(sizeof(int) * numsSize);//为结果数组申请空间
-    int *index = (int *)malloc(sizeof(int) * numsSize);//为索引数组申请临时空间
+    int *res = (int *)malloc(sizeof(int) * numsSize);//为结果数组动态分配空间
+    int *index = (int *)malloc(sizeof(int) * numsSize);//为索引数组动态分配空间
     *returnSize = numsSize;
     if (nums == NULL || numsSize == 0 || res == NULL || index == NULL)
         return NULL;
     memset(res, 0, numsSize * sizeof(int));
     for (int i = 0; i < numsSize; i++)
-        index[i] = i;
+        index[i] = i;//索引数组初始化的值就是他的下标
     mergeSort(nums, 0, numsSize-1, index, res);
-    return res;
+    return res;//返回动态数组
 }
 ```
 

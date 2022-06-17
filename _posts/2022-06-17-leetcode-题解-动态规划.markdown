@@ -1,0 +1,113 @@
+---
+layout:		post
+title:		"leetcode-题解-动态规划"
+subtitle:	"\"算法，leetcode，动态规划\""
+date:		2022-06-17 15:16:00er
+author:		"roroliang"
+header-img:	"img/leetcode2.jpg"
+catalog:	ture
+tags:
+    - 算法
+    - leetcode-题解
+    
+---
+
+> “动态规划--编辑距离”
+
+
+
+
+
+
+
+
+
+# 题目
+
+
+
+![leetcode02](/img/leetcode/leetcode02.png)
+
+
+
+## 方法
+
+动态规划
+
+## 算法模型
+
+两个字符串的动态规划，最长公共子序列。
+
+## 思路
+
+先分析递推结构，然后自底向上递推计算
+
+根据最长公共子序列的学习经验，比较两个字符串的差异可以根据最后一个字符的差异进行穷举。
+
+
+
+### 第一步：定义状态
+
+### 第二步：推导状态转移方程
+
+**注意**：由于要考虑空字符串，针对 `word1` 和 `word2` 的讨论需要将下标减 111，这一点可以通过如下描述或者参考代码进行理解。
+
+**情况 1**：如果 `word1[i - 1] == word2[j - 1]`，即当前考虑的两个字符串的最后一个字符相等，此时它们的编辑距离就等于它们去掉了最后一个字符以后的编辑距离，`dp[i][j] = dp[i - 1][j - 1]`；
+
+![leetcode03](/img/leetcode/leetcode03.png)
+
+**情况 2**：如果 `word1[i - 1] != word2[j - 1]`，此时编辑距离是以下三种情况的最小者（根据题目的定义，编辑距离的定义取最小者）。
+
+------
+
+**情况 2.1**：在当前 `word1` 后面加上与当前 `word2` 最后一个字符相等的字符（操作次数 + 1），此时编辑距离 `dp[i][j] = dp[i][j - 1] + 1`；
+
+![leetcode04](/img/leetcode/leetcode04.png)
+
+
+
+**情况 2.2** ：去掉当前 `word1` 后面最后一个字符（操作次数 + 1），此时编辑距离 `dp[i][j] = dp[i - 1][j] + 1`；
+
+![leetcode05](/img/leetcode/leetcode05.png)
+
+**情况 2.3**：将当前 `word1` 后面最后一个字符替换成当前 `word2`最后一个字符（操作次数 + 1），此时编辑距离 `dp[i][j] = dp[i - 1][j - 1] + 1`。
+
+![leetcode06](/img/leetcode/leetcode06.png)
+
+```c
+int minDistance(char *word1, char *word2) {
+    //word1→word2
+    int len1 = strlen(word1);
+    int len2 = strlen(word2);
+    //如果其中一个为0，编辑距离就是另一个字符串长度
+    if (len1 * len2 == 0) {
+        return len1 + len2;
+    }
+    //多开一行一列，为了保存边界条件，即字符串为0的情况
+    int dp[len1 + 1][len2 + 1];
+    //将前面空的字符补0
+    memset(dp, 0, sizeof(dp));
+    //初始化，当word2长度为0时，将word1全部删除
+    for (int i = 0; i <= len1; i++) {
+        dp[i][0] = i;
+    }
+    //初始化，当word1长度为0时，将word2全部删除
+    for (int i = 0; i <= len2; i++) {
+        dp[0][i] = i;
+    }
+    // 递推开始，注意：填写 dp 数组的时候，由于初始化多设置了一行一列，横纵坐标有个偏移
+    for (int i = 1; i <= len1; i++) {
+        for (int j = 1; j <= len2; j++) {
+            int val1 = dp[i][j - 1] + 1;//word1加上word2最后一个字符
+            int val2 = dp[i - 1][j] + 1;//word1删除一个
+            int val3 = dp[i - 1][j - 1];
+            if (word1[i - 1] != word2[j - 1]) {
+                val3 += 1;//不等时换成修改操作，操作+1
+            }
+            dp[i][j] = fmin(val1, fmin(val2, val3));
+        }
+    }
+    return dp[len1][len2];
+}
+```
+
