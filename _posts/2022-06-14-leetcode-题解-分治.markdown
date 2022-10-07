@@ -142,7 +142,7 @@ int* countSmaller(int* nums, int numsSize, int* returnSize)
     for (int i = 0; i < numsSize; i++)
         index[i] = i;//索引数组初始化的值就是他的下标
     mergeSort(nums, 0, numsSize-1, index, res);
-    return res;//返回动态数组
+    return res;//返回动态结果数组
 }
 ```
 
