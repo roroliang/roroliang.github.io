@@ -1,3 +1,18 @@
+---
+layout:     post
+title:      "B/S架构"
+subtitle:   " \"bs架构\""
+date:       2023-04-09 12:00:00
+author:     "roroliang"
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+tags:
+    - B/S架构
+    - 
+---
+
+
+
 # B/S架构
 
 第一层是[浏览器](https://baike.baidu.com/item/浏览器/213911?fromModule=lemma_inlink)，即[客户端](https://baike.baidu.com/item/客户端/101081?fromModule=lemma_inlink)，只有简单的输入输出功能，处理极少部分的事务逻辑。由于客户不需要安装客户端，只要有浏览器就能上网浏览，所以它面向的是大范围的用户，所以界面设计得比较简单，通用。

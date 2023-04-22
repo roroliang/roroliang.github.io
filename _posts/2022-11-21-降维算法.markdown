@@ -1,0 +1,245 @@
+---
+layout:     post
+title:      "降维算法"
+subtitle:   ""
+date:       2022-11-21
+author:     "roroliang"
+header-img: "img/home-bg.jpg"
+tags:
+    - machine_learning
+---
+
+**本文目录**
+* TOC
+{:toc}
+
+
+# 降维算法
+机器学习中的降维就是指通过某种数学变换，将原始高位属性空间转变为一个低维“子空间”。进行降维的主要原因是，在很多时候，人们观测或者收集到的数据样本虽然是高维的，但是与学习任务密切
+相关的也许仅是某个低维分布，即高维的表达中存在冗余信息以及噪音信息，会对模型的效果产生影响。而降维能够消除这些噪音，提高模型的精度。
+除此之外，高维情形下，还会产生数据样本稀疏，距离计算困难等问题，通过降维算法对高维特征进行转换，可以有效的克服这些问题。
+
+主成分分析以及线性判别分析是两种著名的降维算法，这篇博客主要针对这两种算法的原理进行比较总结。
+
+## 主成分分析
+
+​	主成分分析（Principal components analysis，以下简称PCA）是最重要的降维方法之一。在数据压缩消除冗余和数据噪音消除等领域都有广泛的应用。
+
+​	PCA顾名思义，就是找出数据里最主要的方面，用数据里最主要的方面来代替原始数据。具体的，假如我们的数据集是$n$维的，共有$m$个数据$(x^{(1)},x^{(2)},...,x^{(m)})$。我们希望将这$m$个数据的维度从$n$维降到$n'$维，希望这$m$个$n'$维的数据集尽可能的代表原始数据集。我们知道数据从$n$维降到$n'$维肯定会有损失，但是我们希望损失尽可能的小。那么如何让这$n'$维的数据尽可能表示原来的数据呢？
+
+​	降维实际上可以看成是将$n$维空间内的样本点投射到一个超平面上，通常来说要使得投射过程中信息的损失尽可能小，这个超平面应该满足：
+
+* 最近重构性，即样本点到这个超平面($n'$维大小的空间内的超平面)的**距离足够近**
+* 最大可分性，即样本点在这个超平面上的投影能**尽可能的分开**。
+
+基于以上两种标准，我们可以得到PCA的两种等价推导：基于最近重构性的推导和基于最大可分性的推导。其中基于最近重构性的推导过程主要是：
+
+* 计算出整个训练集上，利用原样本点$x_i$与基于投影重构的样本点$\hat{x_i}$之间的距离
+
+$$
+  d = \sum_{i=1}^{m} ||x_i - \hat{x_i} ||
+$$
+
+* 最小化$d$即可，详细的过程可以参考西瓜书，因为公式较多就不写出来了。
+
+我们可以看一下比较简单的基于最大可分性的推导。
+
+### 基于最大可分性的推导
+
+​	假设$m$个$n$维数据$X_{n \times m} = (x_1, x_2,...,x_m)$都已经进行了中心化，即$\sum\limits_{i=1}^{m}x_i = 0$。经过投影变换后得到的新的坐标系为$$\{w_1,w_2,...,w_d\}$$，
+其中$w_i$是标准正交基向量，$$\| w_i \|_2 = 1, w_i^Tw_j = 0(i \neq j)$$，样本点$x_i$在新空间中超平面上的投影是$W^Tx_i$ ，若所有样本点的投影尽可能分开，则应该使投影后样本点的方差最大化。投影后样本点的方差为$\sum_{i}W^Tx_ix_i^TW$（**注意：数据已经进行了中心化**），于是优化目标可以写成：
+
+$$
+\underbrace{\arg \max }_{W} \operatorname{tr}\left(W^{T} X X^{T} W\right) \text { s.t. } W^{T} W=I
+$$
+
+​	对上式使用拉格朗日乘子法：
+
+$$
+J(W)=\operatorname{tr}\left(W^{T} X X^{T} W - \lambda\left(W^{T} W-I\right)\right)  \tag{1}
+$$
+
+​	接下来只需要最大化$J(W)$即可，由于
+
+$$
+J(W) = tr(W^TXX^T) - tr(\lambda (W^TW - I))  \\
+\frac{\partial tr(W^TXX^TW)}{\partial W} = 2XX^TW \\
+\frac{\partial  tr(\lambda W^TW)}{\partial W} = 2\lambda W
+$$
+
+​	所以根据式(1)对$W$求导后得到：
+
+$$
+XX^TW = \lambda W
+$$
+
+​	到这里，我们只需要对协方差矩阵$XX^T$进行特征值分解，将求得的特征值排序：$ \lambda_1 \geq \lambda_2 \geq ... \geq \lambda_d$，再取前$d'$个特征值对应的特征向量构成$W = (w_1, w_2, ...., w_{d'})$，这就是出成分分析的解。
+
+> 在实践中，通常通过对$X$进行**奇异值分解**来代替协方差矩阵的特征值分解。这是因为PCA的算法需要先求出协方差矩阵$XX^T$，当样本数多样本特征数也多的时候，这个过程的计算量很大。而SVD有一个好处，有一些SVD实现算法可以不求出协方差矩阵$XX^T$，也能求出左奇异矩阵$U$（SVD的左奇异矩阵实际上就是PCA要的解$W$），这个方法在样本量很大的时候能够提高效率。
+
+
+
+由上面的推导，可以写出PCA算法的流程描述如下：
+
+**输入**：样本集$D = \{x_1, x_2, ...., x_m\}$；低维空间维数$d'$
+
+**输出**：投影矩阵$W = (w_1, w_2, ....w_{d'})$
+
+**过程**：
+
+1.  对所有样本进行中心化：$x_i \leftarrow x_i - \frac{1}{m}\sum_{i=1}^m x_i$
+
+2.  计算样本的协方差矩阵
+
+3.  对协方差矩阵进行特征值分解
+
+4.  取最大的$d'$个特征值所对应的特征向量$w_1, w_2 , ... w_{d'}$作为投影矩阵$W$的列向量
+
+### 核化线性降维
+
+​	线性降维方法假设从高维空间到低维空间的函数映射是线性的，然而在不少的现实任务中，可能需要非线性映射才能找到恰当的低维嵌入。这个时候就需要非线性降维。非线性降维的一种常用方法，是基于核技巧对线性降维方法进行“核化”。
+
+​	在主成分分析中，使用了核函数的主成分分析一般称之为核主成分分析(Kernelized PCA, 以下简称KPCA。假设高维空间的数据是由$n$维空间的数据通过映射$\phi$产生。
+
+​	则对于$n$维空间的特征分解：
+
+$$
+\sum\limits_{i=1}^{m}x^{(i)}x^{(i)T}W=\lambda W
+$$
+
+​	映射为：
+
+$$
+\sum\limits_{i=1}^{m}\phi(x^{(i)})\phi(x^{(i)})^TW=\lambda W
+$$
+
+​	通过在高维空间进行协方差矩阵的特征值分解，然后用和PCA一样的方法进行降维。一般来说，映射$\phi$不用显式的计算，而是在需要计算的时候通过核函数完成。由于KPCA需要核函数的运算，因此它的计算量要比PCA大很多。
+
+## 线性判别分析
+
+​	线性判别分析(Linear Discriminant Analysis,LDA)是一种有监督学习算法，同时经常被用来对数据进行降维。它是Ronald Fisher在1936年发明的，有些资料上也称之为Fisher LDA(Fisher’s Linear Discriminant Analysis)。LDA是目前机器学习、数据挖掘领域中经典且热门的一种算法。
+
+​	相比于PCA,LDA可以作为一种有监督的降维算法。在PCA中，算法没有考虑数据的标签(类别)，只是把原数据映射到一些方差比较大的方向上而已。
+
+### 数学原理
+
+>  **LDA的中心思想——最大化类间距离和最小化类内距离。**
+>
+>  最大化类间距离等价于最大化Ｎ类投影中心距离，
+>
+>  最小化类内距离等价于最小化类内方差，
+>
+>  我们将整个数据集的类内方差定义为各个类分别的方差之和。
+
+​	LDA首先是为了分类服务的，因此只要找到一个投影方向$w$，使得投影后的样本尽可能按照原始类别分开。首先考虑简单的二分类问题，假设存在$C_1, C_2$两个类别的样本，两类的均值分别为$\mu_{1}=\frac{1}{N_{1}} \sum_{x \in C_{1}} x, \quad \mu_{2}=\frac{1}{N_{2}} \sum_{x \in C_{2}} x$，我们希望投影之后两类的距离尽可能大，距离表示为：
+
+$$
+D\left(C_{1}, C_{2}\right)=\left\|\widetilde{\boldsymbol{\mu}}_{1}-\widetilde{\boldsymbol{\mu}}_{2}\right\|_{2}^{2}
+$$
+
+​	其中$$\widetilde{\boldsymbol{\mu}}_{1}, \widetilde{\boldsymbol{\mu}}_{2}$$表示两类的中心在$w$方向上的投影向量，$$\widetilde{\boldsymbol{\mu}}_{1}=\boldsymbol{\omega}^{\mathrm{T}} \boldsymbol{\mu}_{1}, \quad \widetilde{\boldsymbol{\mu}}_{2}=\boldsymbol{\omega}^{\mathrm{T}} \boldsymbol{\mu}_{2}　，$$　因此需要优化的问题为：
+
+$$
+\left\{\begin{array}{ll}{\max _{\omega}\left\|\omega^{\mathrm{T}}\left(\mu_{1}-\mu_{2}\right)\right\|_{2}^{2}} \\ {\text {s.t.} \quad \omega^{\mathrm{T}} \omega=1}\end{array}\right.
+$$
+
+​	容易发现，当$w$方向与$\mu_1 - \mu_2$方向一致的时候，该距离达到最大值。除了希望投影之后两类的距离尽可能大，我们还希望同时优化类内方差，使其尽可能小。我们将整个数据集的类内方差定义为各个类分别的方差之和，经目标函数定义为类间距离和类内距离的比值：
+
+$$
+\max _{\omega} J(\omega)=\frac{\left\|\omega^{\mathrm{T}}\left(\mu_{1}-\mu_{2}\right)\right\|_{2}^{2}}{D_{1}+D_{2}}
+$$
+
+​	其中$w$为单位向量，$D_1, D_2$分别表示两类投影后的方差：
+
+$$
+\begin{array}{c}{D_{1}=\sum_{x \in C_{1}}\left(\omega^{\mathrm{T}} x-\omega^{\mathrm{T}} \mu_{1}\right)^{2}=}  {\sum_{x \in C_{1}} \omega^{\mathrm{T}}\left(x-\mu_{1}\right)\left(x-\mu_{1}\right)^{\mathrm{T}} \omega}\end{array}
+\\ 
+D_{2}=\sum_{x \in C_{2}} \omega^{\mathrm{T}}\left(x-\mu_{2}\right)\left(x-\mu_{2}\right)^{\mathrm{T}} \omega
+$$
+
+​	因此$J(w)$可以写成
+
+$$
+J(\omega)=\frac{\omega^{\mathrm{T}}\left(\mu_{1}-\mu_{2}\right)\left(\mu_{1}-\mu_{2}\right)^{\mathrm{T}} \omega}{\sum_{x \in C_{i}} \omega^{\mathrm{T}}\left(x-\mu_{i}\right)\left(x-\mu_{i}\right)^{\mathrm{T}} \omega}
+$$
+
+​	定义类间散度矩阵$S_{B}=\left(\mu_{1}-\mu_{2}\right)\left(\mu_{1}-\mu_{2}\right)^{\mathrm{T}}$，类内散度矩阵$S_{w}=\sum_{x \in C_{i}}\left(x-\mu_{i}\right)\left(x-\mu_{i}\right)^{\mathrm{T}}$，则$J(w)$可以写成
+
+$$
+J(\omega)=\frac{\omega^{\mathrm{T}} S_{B} \omega}{\omega^{\mathrm{T}} S_{w} \omega}
+$$
+
+​	为了最大化$J(w)$，只需要对$w$求偏导，并令导数等于０：
+
+$$
+\frac{\partial J(\omega)}{\partial \omega}=\frac{\left(\frac{\partial \omega^{\mathrm{T}} S_{B} \omega}{\partial \omega} \omega^{\mathrm{T}} S_{w} \omega-\frac{\partial \omega^{\mathrm{T}} S_{w} \omega}{\partial \omega} \omega^{\mathrm{T}} S_{B} \omega\right)}{\left(\omega^{\mathrm{T}} S_{w} \omega\right)^{2}}=0
+$$
+
+​	于是就有：
+
+$$
+\left(\omega^{\mathrm{T}} S_{w} \omega\right) S_{B} \omega=\left(\omega^{\mathrm{T}} S_{B} \omega\right) S_{w} \omega
+$$
+
+​	由于在二分类问题中，$w$的维度是$2 \times 1$，$S_B$以及$S_w$的维度都是$2 \times 2$，因此$w^T S_ww$和$w^TS_Bw$是两个数，令：
+
+$$
+\lambda=J(\omega)=\frac{\omega^{\mathrm{T}} S_{B} \omega}{\omega^{\mathrm{T}} S_{w} \omega} \\
+则有  \quad S_{B} \omega=\lambda S_{w} \omega \quad 整理得 \boldsymbol{S}_{w}^{-1} \boldsymbol{S}_{B} \boldsymbol{\omega}=\lambda \omega
+$$
+
+​	  从这里我们可以看出,我们最大化的目标对应了一个矩阵的特征值，于是LDA降维变成了一个求矩阵特征向量的问题。$J(w)$就对应了矩阵 $S_w^{−1}S_B$最大的特征值，而投影方向就是这个特征值对应的特征向量。
+
+由于$S_{B}=\left(\mu_{1}-\mu_{2}\right)\left(\mu_{1}-\mu_{2}\right)^{\mathrm{T}}$，因此$S_Bw$的方向始终与$\mu_1 - \mu_2$一致，不妨令$S_bw = \lambda(\mu_0 - \mu_1)$
+代入$$\boldsymbol{S}_{w}^{-1} \boldsymbol{S}_{B} \boldsymbol{\omega}=\lambda \omega$$可得：
+
+$$
+w = S_w^{-1}(\mu_1 - \mu_2)
+$$
+
+也就是说，我们只需要求样本的均值和类内方差,就可以马上得出最佳的投影方向ω。这便是Fisher在1936年提出的线性判别分析。
+
+下面把LDA推广到多分类的情况，假设有$N$个类别，并需要最终将特征降维到$d$维。因此，我们要找到一个$d$维投影超平面$W = \{w_1, w_2, ..., w_d\}$，使得投影后的样本点满足 LDA的目标：最大化类间距离和最小化类内距离。
+
+​	在二分类中提到的类间散度矩阵在类别增加到N的时候仍满足定义，而类间散度矩阵$S_b$则无法按照原始定义。为此，我们可以定义一个新的矩阵$S_t$，来表示全局整体的散度，称为全局散度矩阵：
+
+$$
+S_{t}=\sum_{i=1}^{n}\left(x_{i}-\mu\right)\left(x_{i}-\mu\right)^{\mathrm{T}}
+$$
+
+​	把全局散度定义为类内散度以及类间散度之和即$S_t = S_b + S_w$，那么类间散度矩阵可以表示为：
+
+$$
+\begin{aligned} S_{b} &=S_{t}-S_{w} \\ &=\sum_{i=1}^{n}\left(x_{i}-\mu\right)\left(x_{i}-\mu\right)^{\mathrm{T}}-\sum_{x \in C_{i}}\left(x-\mu_{i}\right)\left(x-\mu_{i}\right)^{\mathrm{T}} \\=& \sum_{j=1}^{N}\left(\sum_{x \in C_{j}}(x-\mu)(x-\mu)^{\mathrm{T}}-\sum_{x \in C_{j}}\left(x-\mu_{j}\right)\left(x-\mu_{j}\right)^{\mathrm{T}}\right) \\ &=\sum_{j=1}^{N} m_{j}\left(\mu_{j}-\mu\right)\left(\mu_{j}-\mu\right)^{\mathrm{T}} \end{aligned}
+$$
+
+​	具体的推导过程如下：
+
+![](/img/blog_imgs/lda_tuidao.png)
+
+其中，$m_i$是第$i$个类别中的样本个数，$N$是总的类别个数，$u$表示全部样本的中心。从上式可以看出来，类间散度表示的就是每个类别中心到全局中心的一种加权距离。我们最大化类间散度实际上优化的是每个类别的中心经过投影后离全局中心的投影足够远。
+
+根据LDA的原理，我们可以将最大化的目标定义为：
+
+$$
+J(\boldsymbol{W})=\frac{\operatorname{tr}\left(\boldsymbol{W}^{\mathrm{T}} \boldsymbol{S}_{b} \boldsymbol{W}\right)}{\operatorname{tr}\left(\boldsymbol{W}^{\mathrm{T}} \boldsymbol{S}_{w} \boldsymbol{W}\right)}
+$$
+
+​	其中$W$是要求解的投影超平面，由二分类中的结论可知，最大化$J(W)$对应了以下广义特征值求解的问题：
+
+$$
+S_bw = \lambda S_ww
+$$
+
+​	求解最佳投影平面$$\boldsymbol{W}=\left\{\boldsymbol{\omega}_{1}, \boldsymbol{\omega}_{2}, \ldots, \boldsymbol{\omega}_{d}\right\}$$即求解$S_w^{-1}S_b$矩阵特征值前$d$大对应的特征向量组成的矩阵。这就将原始的特征空间投影到了新的d维空间中。至此我们得到了与PCA步骤类似,但具有多个类别标签高维数据的LDA求解方法：
+
+![](/img/blog_imgs/lda_liucheng.png)
+
+
+## PCA与LDA的比较
+
+​	结果相同，对数据进行降维。但是原理不同，在选择进行投影的超平面的时候，**PCA选择的是投影后数据方差最大的方向**。由于它是无监督的，因此PCA假设方差越大，信息量越多，用主成分来表示原始数据可以去除冗余的维度，达到降维。而**LDA选择的是投影后类内方差小、类间方差大的方向**。其用到了类别标签信息，为了找到数据中具有判别性的维度，使得原始数据在这些方向上投影后，不同类别尽可能区分开。
+
+​	Fisher LDA相比PCA更善于对有类别信息的数据进行降维处理，但它对数据的分布做了一些很强的假设，例如,每个类数据都是高斯分布、各个类的协方差相等。尽管这些假设在实际中并不一定完全满足，但LDA已被证明是非常有效的一种降维方法。主要是因为线性模型对于噪声的鲁棒性比较好，但由于模型简单,表达能力有一定局限性，我们可以通过引入核函数扩展LDA方法以处理分布较为复杂的数据。
+
+​	从应用的角度,我们可以掌握一个基本的原则——对无监督的任务使用PCA进行降维,对有监督的则应用LDA。
