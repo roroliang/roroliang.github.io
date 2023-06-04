@@ -215,7 +215,7 @@ $$
 
 ​	具体的推导过程如下：
 
-![](/img/blog_imgs/lda_tuidao.png)
+![](../img/blog_imgs/lda_tuidao.png)
 
 其中，$m_i$是第$i$个类别中的样本个数，$N$是总的类别个数，$u$表示全部样本的中心。从上式可以看出来，类间散度表示的就是每个类别中心到全局中心的一种加权距离。我们最大化类间散度实际上优化的是每个类别的中心经过投影后离全局中心的投影足够远。
 
@@ -233,7 +233,7 @@ $$
 
 ​	求解最佳投影平面$$\boldsymbol{W}=\left\{\boldsymbol{\omega}_{1}, \boldsymbol{\omega}_{2}, \ldots, \boldsymbol{\omega}_{d}\right\}$$即求解$S_w^{-1}S_b$矩阵特征值前$d$大对应的特征向量组成的矩阵。这就将原始的特征空间投影到了新的d维空间中。至此我们得到了与PCA步骤类似,但具有多个类别标签高维数据的LDA求解方法：
 
-![](/img/blog_imgs/lda_liucheng.png)
+![](../img/blog_imgs/lda_liucheng.png)
 
 
 ## PCA与LDA的比较

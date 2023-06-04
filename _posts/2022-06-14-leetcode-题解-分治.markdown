@@ -26,7 +26,7 @@ tags:
 
 # 题目
 
-![leetcode01](/img/leetcode/leetcode01.png)
+![leetcode01](2022-06-14-leetcode-题解-分治.assets/leetcode01.png)
 
 ## 方法
 

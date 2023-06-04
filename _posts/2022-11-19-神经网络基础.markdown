@@ -26,7 +26,7 @@ tags:
 
 神经网络中最基本的成分是神经元（neuron）模型：
 
-![](/img/blog_imgs/neuron_model.png)
+![](../img/blog_imgs/neuron_model.png)
 
 在这个模型中，神经元接收来自$n$个其他神经元传递过来的输入信号，这些输入信号通过带权重的连接进行传递，神经元接收到的总输入值将与神经元的阈值进行比较，然后通过激活函数处理以产生神经元的输出。
 
@@ -36,7 +36,7 @@ tags:
 
 感知机（Perceptron）由两层神经元组成：
 
-![](/img/blog_imgs/perceptron.png)
+![](../img/blog_imgs/perceptron.png)
 
 
 
@@ -50,7 +50,7 @@ $$
 
 要解决非线性可分问题，需要使用多层功能神经元。下面是两个多层前馈神经网络的示意图：
 
-![](/img/blog_imgs/qiankui.png)
+![](../img/blog_imgs/qiankui.png)
 
 这里的“前馈”并不意味着网络中的信号不能像后传，**而是指网络拓扑结构上不存在环或回路**。
 
@@ -152,7 +152,7 @@ $$
 
 图像如下所示：
 
-![](/img/blog_imgs/sigmoid.png)
+![](../img/blog_imgs/sigmoid.png)
 
 
 
@@ -170,7 +170,7 @@ $$
 f^{\prime}(z)=1-(f(z))^{2}
 $$
 
-![](/img/blog_imgs/tanh.png)
+![](../img/blog_imgs/tanh.png)
 
 ### ReLU激活函数
 
@@ -186,7 +186,7 @@ $$
 f^{\prime}(z)=\left\{\begin{array}{l}{1, z>0} \\ {0, z \leqslant 0}\end{array}\right.
 $$
 
-![](/img/blog_imgs/relu.png)
+![](../img/blog_imgs/relu.png)
 
 ### 三者的比较
 

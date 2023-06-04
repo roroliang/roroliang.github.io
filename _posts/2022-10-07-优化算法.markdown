@@ -76,7 +76,7 @@ $$
 
 这四种损失函数的曲线如图所示：
 
-![](/img/blog_imgs/sunshi_hanshu.png)
+![](../img/blog_imgs/sunshi_hanshu.png)
 
 
 
@@ -172,7 +172,7 @@ $\frac{f(x)-f(x_k)}{x-x_k} = f^{'}(x_k) \Rightarrow f(x)=f(x_k) + f^{'}(x_k) \cd
 
 牛顿法求解方程的根的过程如下图所示：
 
-![](/img/blog_imgs/niudunfa_guocheng.gif)
+![](../img/blog_imgs/niudunfa_guocheng.gif)
 
 
 
@@ -423,7 +423,7 @@ $$
 
 与随机梯度下降相比，动量方法的收敛速度更快，收敛曲线也更稳定。如下图所示：
 
-![](/img/blog_imgs/momentum.png)
+![](../img/blog_imgs/momentum.png)
 
 
 
