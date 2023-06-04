@@ -40,7 +40,7 @@ Hi，我是石浩良，人工智能初心者，重庆理工大学本科三年级
 
 
 
-<img src="./zh.assets/wife2.jpg" alt="wife2" style="zoom:3%;" />
+<img src="https://roroliang.github.io/img/wife2.jpg" alt="wife2" style="zoom:3%;" />
 
 
 
