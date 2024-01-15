@@ -30,13 +30,13 @@ Hi，我是石浩良，人工智能初心者，重庆理工大学本科三年级
 
 
 
-##### 我的女孩
+##### 
 
 微博全是无聊内容
 
 [bilibli](https://space.bilibili.com/502664433)
 
-<img src="https://roroliang.github.io/img/wife.jpg" style="zoom:20%;" />
+
 
 
 
