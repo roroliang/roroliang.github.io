@@ -34,6 +34,6 @@ Her Weibo is full of boring content.
 
 [bilibli](https://space.bilibili.com/502664433)
 
-<img src="https://roroliang.github.io/img/wife.jpg" style="zoom:20%;" />
+
 
 <img src="https://roroliang.github.io/img/wife2.jpg" alt="wife2" style="zoom:3%;" />
