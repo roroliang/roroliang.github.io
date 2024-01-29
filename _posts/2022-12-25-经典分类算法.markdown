@@ -5,6 +5,7 @@ subtitle:   ""
 date:       2022-12-25
 author:     "roroliang"
 header-img: ""
+mathjax: true
 tags:
     - machine_learning
     - 感知机
