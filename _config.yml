@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: 1928259802@qq.com
 description: "关于程序与设计、算法、人工智能 | 石浩良，Ai & Algorithm，Software Engineer| 这里是 @roroliang石浩良 的个人博客，与你一起发现更大的世界。"
 keyword: "石浩良, roroliang, 基于Hux Blog, 博客, 个人网站, 互联网,算法,学习过程"
-url: "https://roroliang.github.io"              # your host, for absolute URL
+url: "https://roroliang.top"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
@@ -80,7 +80,7 @@ ga_domain: roroliang.github.io
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "石浩良，重庆理工大学，智能科学与技术，人工智能初心者 <br> An AI/Algorithm/ Machine Learning ."
+sidebar-about-description: "石浩良\n重庆理工大学，智能科学与技术\n人工智能初心者 <br> An AI/Algorithm/ Machine Learning ."
 sidebar-avatar: https://roroliang.github.io/img/avatar-hux.jpg # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
